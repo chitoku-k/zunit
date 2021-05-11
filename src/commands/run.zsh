@@ -83,12 +83,16 @@ function _zunit_execute_test() {
       # defined and the test exits early
       if (( \$+functions[__zunit_test_teardown] )); then
         TRAPEXIT() {
-          __zunit_test_teardown 2>&1
+          [[ \$_zunit_subshell = \$ZSH_SUBSHELL ]] && __zunit_test_teardown 2>&1
         }
         TRAPZERR() {
-          [[ -o ERR_EXIT ]] && __zunit_test_teardown 2>&1
+          [[ \$_zunit_subshell = \$ZSH_SUBSHELL ]] && [[ -o ERR_EXIT ]] && __zunit_test_teardown 2>&1
         }
       fi
+
+      # Store the current subshell to prevent subshells from triggering the
+      # teardown function
+      _zunit_subshell=\$ZSH_SUBSHELL
 
       # Create some local variables to store test state in
       integer _zunit_assertion_count=0
