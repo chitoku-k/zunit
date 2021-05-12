@@ -10,7 +10,7 @@ function _zunit_assert_is_substring_of() {
 
   [[ "$comparison" = *"$value"* ]] && return 0
 
-  echo "'$value' is not a substring of '$comparison'"
+  echo "'$value' is not a substring of '$comparison'" | _zunit_post_assert
   exit 1
 }
 
@@ -22,7 +22,7 @@ function _zunit_assert_is_not_substring_of() {
 
   [[ "$comparison" != *"$value"* ]] && return 0
 
-  echo "'$value' is a substring of '$comparison'"
+  echo "'$value' is a substring of '$comparison'" | _zunit_post_assert
   exit 1
 }
 
@@ -34,7 +34,7 @@ function _zunit_assert_contains() {
 
   [[ "$value" = *"$comparison"* ]] && return 0
 
-  echo "'$value' does not contain '$comparison'"
+  echo "'$value' does not contain '$comparison'" | _zunit_post_assert
   exit 1
 }
 
@@ -46,7 +46,7 @@ function _zunit_assert_does_not_contain() {
 
   [[ "$value" != *"$comparison"* ]] && return 0
 
-  echo "'$value' contains '$comparison'"
+  echo "'$value' contains '$comparison'" | _zunit_post_assert
   exit 1
 }
 
@@ -58,7 +58,7 @@ function _zunit_assert_equals() {
 
   [[ $value -eq $comparison ]] && return 0
 
-  echo "'$value' is not equal to '$comparison'"
+  echo "'$value' is not equal to '$comparison'" | _zunit_post_assert
   exit 1
 }
 
@@ -70,7 +70,7 @@ function _zunit_assert_not_equal_to() {
 
   [[ $value -ne $comparison ]] && return 0
 
-  echo "'$value' is equal to '$comparison'"
+  echo "'$value' is equal to '$comparison'" | _zunit_post_assert
   exit 1
 }
 
@@ -82,7 +82,7 @@ function _zunit_assert_is_positive() {
 
   [[ $value -gt 0 ]] && return 0
 
-  echo "'$value' is not positive"
+  echo "'$value' is not positive" | _zunit_post_assert
   exit 1
 }
 
@@ -94,7 +94,7 @@ function _zunit_assert_is_negative() {
 
   [[ $value -lt 0 ]] && return 0
 
-  echo "'$value' is not negative"
+  echo "'$value' is not negative" | _zunit_post_assert
   exit 1
 }
 
@@ -106,7 +106,7 @@ function _zunit_assert_is_greater_than() {
 
   [[ $value -gt $comparison ]] && return 0
 
-  echo "'$value' is not greater than '$comparison'"
+  echo "'$value' is not greater than '$comparison'" | _zunit_post_assert
   exit 1
 }
 
@@ -118,7 +118,7 @@ function _zunit_assert_is_less_than() {
 
   [[ $value -lt $comparison ]] && return 0
 
-  echo "'$value' is not less than '$comparison'"
+  echo "'$value' is not less than '$comparison'" | _zunit_post_assert
   exit 1
 }
 
@@ -130,7 +130,7 @@ function _zunit_assert_same_as() {
 
   [[ $value = $comparison ]] && return 0
 
-  echo "'$value' is not the same as '$comparison'"
+  echo "'$value' is not the same as '$comparison'" | _zunit_post_assert
   exit 1
 }
 
@@ -142,7 +142,7 @@ function _zunit_assert_different_to() {
 
   [[ $value != $comparison ]] && return 0
 
-  echo "'$value' is the same as '$comparison'"
+  echo "'$value' is the same as '$comparison'" | _zunit_post_assert
   exit 1
 }
 
@@ -154,7 +154,7 @@ function _zunit_assert_is_empty() {
 
   [[ -z ${value[@]} ]] && return 0
 
-  echo "'${value[@]}' is not empty"
+  echo "'${value[@]}' is not empty" | _zunit_post_assert
   exit 1
 }
 
@@ -166,7 +166,7 @@ function _zunit_assert_is_not_empty() {
 
   [[ -n ${value[@]} ]] && return 0
 
-  echo "value is empty"
+  echo "value is empty" | _zunit_post_assert
   exit 1
 }
 
@@ -178,7 +178,7 @@ function _zunit_assert_matches() {
 
   [[ $value =~ $pattern ]] && return 0
 
-  echo "'$value' does not match /$pattern/"
+  echo "'$value' does not match /$pattern/" | _zunit_post_assert
   exit 1
 }
 
@@ -190,7 +190,7 @@ function _zunit_assert_does_not_match() {
 
   [[ ! $value =~ $pattern ]] && return 0
 
-  echo "'$value' matches /$pattern/"
+  echo "'$value' matches /$pattern/" | _zunit_post_assert
   exit 1
 }
 
@@ -209,7 +209,7 @@ function _zunit_assert_in() {
 
   [[ $found -eq 1 ]] && return 0
 
-  echo "'$value' is not in (${(@f)array})"
+  echo "'$value' is not in (${(@f)array})" | _zunit_post_assert
   exit 1
 }
 
@@ -227,7 +227,7 @@ function _zunit_assert_not_in() {
 
   [[ $found -eq 0 ]] && return 0
 
-  echo "'$value' is in (${(@f)array})"
+  echo "'$value' is in (${(@f)array})" | _zunit_post_assert
   exit 1
 }
 
@@ -245,7 +245,7 @@ function _zunit_assert_is_key_in() {
 
   [[ $found -eq 1 ]] && return 0
 
-  echo "'$value' is not a key in (${(@kv)hash})"
+  echo "'$value' is not a key in (${(@kv)hash})" | _zunit_post_assert
   exit 1
 }
 
@@ -263,7 +263,7 @@ function _zunit_assert_is_not_key_in() {
 
   [[ $found -eq 0 ]] && return 0
 
-  echo "'$value' is a key in (${(@kv)hash})"
+  echo "'$value' is a key in (${(@kv)hash})" | _zunit_post_assert
   exit 1
 }
 
@@ -281,7 +281,7 @@ function _zunit_assert_is_value_in() {
 
   [[ $found -eq 1 ]] && return 0
 
-  echo "'$value' is not a value in (${(@kv)hash})"
+  echo "'$value' is not a value in (${(@kv)hash})" | _zunit_post_assert
   exit 1
 }
 
@@ -299,7 +299,7 @@ function _zunit_assert_is_not_value_in() {
 
   [[ $found -eq 0 ]] && return 0
 
-  echo "'$value' is a value in (${(@kv)hash})"
+  echo "'$value' is a value in (${(@kv)hash})" | _zunit_post_assert
   exit 1
 }
 
@@ -318,7 +318,7 @@ function _zunit_assert_exists() {
 
   [[ -e "$filepath" ]] && return 0
 
-  echo "'$pathname' does not exist"
+  echo "'$pathname' does not exist" | _zunit_post_assert
   exit 1
 }
 
@@ -337,7 +337,7 @@ function _zunit_assert_is_file() {
 
   [[ -f "$filepath" ]] && return 0
 
-  echo "'$pathname' does not exist or is not a file"
+  echo "'$pathname' does not exist or is not a file" | _zunit_post_assert
   exit 1
 }
 
@@ -356,7 +356,7 @@ function _zunit_assert_is_dir() {
 
   [[ -d "$filepath" ]] && return 0
 
-  echo "'$pathname' does not exist or is not a directory"
+  echo "'$pathname' does not exist or is not a directory" | _zunit_post_assert
   exit 1
 }
 
@@ -375,7 +375,7 @@ function _zunit_assert_is_link() {
 
   [[ -h "$filepath" ]] && return 0
 
-  echo "'$pathname' does not exist or is not a symbolic link"
+  echo "'$pathname' does not exist or is not a symbolic link" | _zunit_post_assert
   exit 1
 }
 
@@ -394,7 +394,7 @@ function _zunit_assert_is_readable() {
 
   [[ -r "$filepath" ]] && return 0
 
-  echo "'$pathname' does not exist or is not readable"
+  echo "'$pathname' does not exist or is not readable" | _zunit_post_assert
   exit 1
 }
 
@@ -413,7 +413,7 @@ function _zunit_assert_is_writable() {
 
   [[ -w "$filepath" ]] && return 0
 
-  echo "'$pathname' does not exist or is not writable"
+  echo "'$pathname' does not exist or is not writable" | _zunit_post_assert
   exit 1
 }
 
@@ -432,6 +432,13 @@ function _zunit_assert_is_executable() {
 
   [[ -x "$filepath" ]] && return 0
 
-  echo "'$pathname' does not exist or is not executable"
+  echo "'$pathname' does not exist or is not executable" | _zunit_post_assert
   exit 1
+}
+
+###
+# Default implementation for post-processing the assertion message
+###
+function _zunit_post_assert() {
+  cat
 }
