@@ -111,7 +111,10 @@ function _zunit_execute_test() {
 
       # Check the assertion count, and if it is 0, return
       # the warning exit code
-      [[ \$_zunit_assertion_count -gt 0 ]] || return 248
+      if [[ \$_zunit_assertion_count -eq 0 ]]; then
+        unsetopt ERR_EXIT
+        return 248
+      fi
     }"
 
     # Increment the test count
