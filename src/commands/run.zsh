@@ -239,7 +239,8 @@ function _zunit_run_testfile() {
   local testbody testname pattern \
         setup teardown
   local -a bits; bits=("${(s/@/)1}")
-  local testfile="${bits[1]}" test_to_run="${bits[2]}" testdir="$(dirname "$testfile")"
+  local testfile="${bits[1]}" test_to_run="${bits[2]}"
+  local testdir="$(dirname -- "$testfile")"
   local -a lines tests test_names
   tests=()
   test_names=()
@@ -435,7 +436,7 @@ function _zunit_parse_argument() {
 # Run tests
 ###
 function _zunit_run() {
-  local -a arguments testfiles
+  local -a arguments testfile testfiles
   local fail_fast tap allow_risky verbose
   local output_text logfile_text output_html logfile_html
 
